@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: API History Management
+  description: Composant HistoryManagementDto pour la gestion de l'historique
+  version: 1.0.0
+paths:
+  { }
+components:
+  schemas:
+    HistoryManagementDto:
+      type: object
+      properties:
+        programCreation:
+          type: string
+          description: "Nom du programme ayant créé l'enregistrement"
+        programModification:
+          type: string
+          description: "Nom du programme ayant modifié l'enregistrement"
+        creationDate:
+          type: string
+          format: date
+          description: "Date de création de l'enregistrement"
+        creationTime:
+          type: string
+          format: date-time
+          description: "Heure de création de l'enregistrement"
+        userCreation:
+          type: string
+          description: "Utilisateur ayant créé l'enregistrement"
+        modificationDate:
+          type: string
+          format: date
+          description: "Date de la dernière modification"
+        modificationTime:
+          type: string
+          format: date-time
+          description: "Heure de la dernière modification"
+        userModification:
+          type: string
+          description: "Utilisateur ayant modifié l'enregistrement"

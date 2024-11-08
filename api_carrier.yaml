@@ -1,0 +1,169 @@
+openapi: 3.0.1
+info:
+  title: API Carrier
+  description: API pour la gestion des transporteurs
+  version: 1.0.0
+tags:
+  - name: Carrier
+    description: Transporteur
+paths:
+  /v1/carriers:
+    get:
+      tags:
+        - Carrier
+      operationId: getAll
+      summary: "Obtenir les transporteurs par société"
+      description: "Récupère une liste de transporteurs associée à une société spécifique."
+      parameters:
+        - in: header
+          name: idCompany
+          required: true
+          schema:
+            type: integer
+          description: "Identifiant de la société"
+      responses:
+        '200':
+          description: "Liste des transporteurs récupérée avec succès"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarrierDto'
+
+    post:
+      tags:
+        - Carrier
+      operationId: postAll
+      summary: "Créer des transporteurs"
+      description: "Ajoute une liste de transporteurs."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CarrierDto'
+      responses:
+        '201':
+          description: "Liste des transporteurs créée avec succès"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarrierDto'
+        '406':
+          description: Not Acceptable
+
+    put:
+      tags:
+        - Carrier
+      operationId: putAll
+      summary: "Mettre à jour la liste des transporteurs"
+      description: "Met à jour une liste de transporteurs existante."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CarrierDto'
+      responses:
+        '202':
+          description: "Liste des transporteurs mise à jour avec succès"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarrierDto'
+        '406':
+          description: Not Acceptable
+
+    delete:
+      tags:
+        - Carrier
+      operationId: deleteAll
+      summary: "Supprimer la liste des transporteurs"
+      description: "Supprime une liste de transporteurs."
+      responses:
+        '204':
+          description: "Liste des transporteurs supprimée avec succès"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarrierDto'
+        '406':
+          description: Not Acceptable
+
+components:
+  schemas:
+    CarrierDto:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/CarrierIdDto'
+        idQualifier:
+          type: integer
+          description: "Qualifieur"
+        name:
+          type: string
+          description: "Nom du transporteur"
+        address1:
+          type: string
+          description: "Adresse principale du transporteur"
+        address2:
+          type: string
+          description: "Adresse secondaire du transporteur"
+        address3:
+          type: string
+          description: "Adresse tertiaire du transporteur"
+        zipCode:
+          type: string
+          description: "Code postal du transporteur"
+        city:
+          type: string
+          description: "Ville du transporteur"
+        telephone:
+          type: string
+          description: "Numéro de téléphone du transporteur"
+        fax:
+          type: string
+          description: "Numéro de télécopie du transporteur"
+        email:
+          type: string
+          description: "Adresse e-mail du transporteur"
+        website:
+          type: string
+          description: "Site internet du transporteur"
+        country:
+          type: integer
+          description: "Identifiant du pays"
+        department:
+          type: integer
+          description: "Département"
+        logisticsLocation:
+          type: integer
+          description: "Lieu logistique"
+        numberAtTheCarrier:
+          type: string
+          description: "Numéro attribué par le transporteur"
+        historyManagement:
+          $ref: './history_management.yaml#/components/schemas/HistoryManagementDto'
+
+    CarrierIdDto:
+      type: object
+      properties:
+        idCompany:
+          type: integer
+          description: "Identifiant de la société"
+        idCarrier:
+          type: integer
+          description: "Identifiant du transporteur"
